@@ -103,3 +103,104 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
+        
+
+def average_hw_grade(students, course):
+    all_grades = []
+    for student in students:
+        if course in student.grades:
+            all_grades += student.grades[course]
+    if not all_grades:
+        return 0
+    return round(sum(all_grades) / len(all_grades), 1)
+
+
+def average_lecture_grade(lecturers, course):
+    all_grades = []
+    for lecturer in lecturers:
+        if course in lecturer.grades:
+            all_grades += lecturer.grades[course]
+    if not all_grades:
+        return 0
+    return round(sum(all_grades) / len(all_grades), 1)
+
+
+if __name__ == '__main__':
+    # Создаём студентов
+    student_1 = Student('Ольга', 'Алёхина', 'Ж')
+    student_1.courses_in_progress += ['Python', 'Java']
+    student_1.finished_courses += ['Введение в программирование']
+
+    student_2 = Student('Иван', 'Сидоров', 'М')
+    student_2.courses_in_progress += ['Python', 'Java']
+    student_2.finished_courses += ['Git']
+
+    # Создаём лекторов
+    lecturer_1 = Lecturer('Иван', 'Иванов')
+    lecturer_1.courses_attached += ['Python']
+
+    lecturer_2 = Lecturer('Пётр', 'Петров')
+    lecturer_2.courses_attached += ['Java']
+
+    # Создаём ревьюеров
+    reviewer_1 = Reviewer('Сергей', 'Смирнов')
+    reviewer_1.courses_attached += ['Python']
+
+    reviewer_2 = Reviewer('Анна', 'Кузнецова')
+    reviewer_2.courses_attached += ['Java']
+
+    # Ревьюеры ставят оценки студентам
+    reviewer_1.rate_hw(student_1, 'Python', 9)
+    reviewer_1.rate_hw(student_1, 'Python', 10)
+    reviewer_1.rate_hw(student_2, 'Python', 8)
+    reviewer_2.rate_hw(student_1, 'Java', 7)
+    reviewer_2.rate_hw(student_2, 'Java', 9)
+    reviewer_2.rate_hw(student_2, 'Java', 10)
+
+    # Студенты ставят оценки лекторам
+    student_1.rate_lecture(lecturer_1, 'Python', 10)
+    student_1.rate_lecture(lecturer_1, 'Python', 9)
+    student_2.rate_lecture(lecturer_1, 'Python', 8)
+    student_1.rate_lecture(lecturer_2, 'Java', 7)
+    student_2.rate_lecture(lecturer_2, 'Java', 9)
+
+    # Печатаем информацию
+    print(student_1)
+    print()
+    print(student_2)
+    print()
+    print(lecturer_1)
+    print()
+    print(lecturer_2)
+    print()
+    print(reviewer_1)
+    print()
+    print(reviewer_2)
+    print()
+
+    # Сравнения
+    print(f'Студент 1 > Студент 2: {student_1 > student_2}')
+    print(f'Студент 1 == Студент 2: {student_1 == student_2}')
+    print(f'Лектор 1 > Лектор 2: {lecturer_1 > lecturer_2}')
+    print(f'Лектор 1 < Лектор 2: {lecturer_1 < lecturer_2}')
+
+    # Средние оценки по курсам
+    students = [student_1, student_2]
+    lecturers = [lecturer_1, lecturer_2]
+
+    print(
+        f'\nСредняя оценка студентов по Python: '
+        f'{average_hw_grade(students, "Python")}'
+    )
+    print(
+        f'Средняя оценка студентов по Java: '
+        f'{average_hw_grade(students, "Java")}'
+    )
+    print(
+        f'Средняя оценка лекторов по Python: '
+        f'{average_lecture_grade(lecturers, "Python")}'
+    )
+    print(
+        f'Средняя оценка лекторов по Java: '
+        f'{average_lecture_grade(lecturers, "Java")}'
+    )
