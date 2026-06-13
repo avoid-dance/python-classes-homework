@@ -103,7 +103,9 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
-        
+
+    def __str__(self):
+        return f'Имя: {self.name}\nФамилия: {self.surname}'    
 
 def average_hw_grade(students, course):
     all_grades = []
