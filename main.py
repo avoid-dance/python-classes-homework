@@ -8,6 +8,12 @@ class Student:
         self.grades = {}
 
     def _average_grade(self):
+        """Вычисляет среднюю оценку студента по всем курсам.
+
+        Приватный метод, используется в __str__,
+        __lt__ и __eq__. Возвращает 0, если оценок ещ нет.
+        """
+
         all_grades = [
             grade
             for grades_list in self.grades.values()
@@ -64,6 +70,11 @@ class Lecturer(Mentor):
         self.grades = {}
 
     def _average_grade(self):
+        """Вычисляет среднюю оценку лектора по всем курсам.
+
+        Приватный метод, используется в __str__,
+        __lt__ и __eq__. Возвращает 0, если оценок ещенет.
+        """
         all_grades = [
             grade
             for grades_list in self.grades.values()
