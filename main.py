@@ -186,6 +186,14 @@ if __name__ == '__main__':
     print(f'Лектор 1 > Лектор 2: {lecturer_1 > lecturer_2}')
     print(f'Лектор 1 < Лектор 2: {lecturer_1 < lecturer_2}')
 
+    # Демонстрация ситуаций, когда оценка не может быть выставлена
+    # Студент пытается оценить лектора по курсу, который не изучает
+    result_1 = student_1.rate_lecture(lecturer_1, 'C++', 9)
+    print(f'Студент оценивает лектора по чужому курсу: {result_1}')
+    # Ревьюер пытается поставить оценку по курсу, к которому не прикреплён
+    result_2 = reviewer_1.rate_hw(student_1, 'Java', 10)
+    print(f'Ревьюер ставит оценку не по своему курсу: {result_2}')
+
     # Средние оценки по курсам
     students = [student_1, student_2]
     lecturers = [lecturer_1, lecturer_2]
